@@ -156,13 +156,13 @@ const DIMENSIONS = [
   },
 ];
 
-const SAMPLE_ANSWERS = {
-  dim1: [2, 2, 1, 1],
-  dim2: [2, 2, 1, 1],
-  dim3: [1, 1, 2, 1],
-  dim4: [2, 2, 1, 2],
-  dim5: [1, 0, 1, 0],
-  dim6: [1, 1, 2, 0],
+const INITIAL_ANSWERS = {
+  dim1: [0, 0, 0, 0],
+  dim2: [0, 0, 0, 0],
+  dim3: [0, 0, 0, 0],
+  dim4: [0, 0, 0, 0],
+  dim5: [0, 0, 0, 0],
+  dim6: [0, 0, 0, 0],
 };
 
 /* =========================================================================
@@ -260,7 +260,7 @@ function MethodologyBadge({ label }) {
 
 export default function App() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState(SAMPLE_ANSWERS);
+  const [answers, setAnswers] = useState(INITIAL_ANSWERS);
   const [aiReport, setAiReport] = useState(null);
   const [reportLoading, setReportLoading] = useState(false);
   const [reportError, setReportError] = useState(null);
@@ -378,12 +378,10 @@ Each phase should reference DCAM target levels and BoT compliance milestones.
 Two sentences positioning 7Square as the right implementation partner. Reference DCAM methodology, African banking experience, and local Tanzanian presence. End with a confident, action-oriented closing line.`;
 
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch("/api/report", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 2000,
           system: systemPrompt,
           messages: [{ role: "user", content: userPrompt }],
         }),
