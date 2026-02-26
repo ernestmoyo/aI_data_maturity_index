@@ -498,7 +498,7 @@ Two sentences positioning 7Square as the right implementation partner. Reference
 
             {/* Footer */}
             <p className="mt-12 text-sm" style={{ color: COLORS.textMuted }}>
-              Powered by 7Square AI Advisory &nbsp;|&nbsp; Confidential &amp; Proprietary &nbsp;|&nbsp; Feb 2026
+              Powered by 7Square AI Advisory &nbsp;|&nbsp; Dataal Solutions &nbsp;|&nbsp; Confidential &amp; Proprietary &nbsp;|&nbsp; Feb 2026
             </p>
           </div>
 
