@@ -386,17 +386,20 @@ Two sentences positioning 7Square as the right implementation partner. Reference
           messages: [{ role: "user", content: userPrompt }],
         }),
       });
-      if (!res.ok) throw new Error("API response not OK");
       const data = await res.json();
+      if (!res.ok) {
+        const detail = data.detail ? JSON.stringify(data.detail) : `Status ${res.status}`;
+        throw new Error(detail);
+      }
       const text =
         data.content && data.content[0] && data.content[0].text
           ? data.content[0].text
           : "";
       if (!text) throw new Error("Empty response");
       setAiReport(text);
-    } catch {
+    } catch (err) {
       setReportError(
-        "Report generation encountered an issue. This is typically a temporary API connectivity problem."
+        `Report generation encountered an issue: ${err.message}`
       );
     } finally {
       setReportLoading(false);
